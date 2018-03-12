@@ -2,11 +2,18 @@
 
 from CPublishmanager import CPublish_manager_byr
 from CPublishmanager import CPublish_manager_newsmth
+from CPublishmanager import CPublish_manager_buaaer
 
 if __name__ == "__main__":
-    manager_byr = CPublish_manager_byr()
-    manager_byr.do_publish()
+    # manager_byr = CPublish_manager_byr("byr")
+    # manager_byr.do_publish()
 
-    manager_newsmth = CPublish_manager_newsmth()
-    #manager_newsmth.do_publish()
-    manager_newsmth.do_reply()
+    # manager_newsmth = CPublish_manager_newsmth("newsmth")
+    # #manager_newsmth.do_publish()
+    # manager_newsmth.do_reply()
+
+    # manager_buaaer = CPublish_manager_buaaer("buaaer")
+    # manager_buaaer.do_publish()
+
+    manager_buaaer = CPublish_manager_buaaer("bjtu")
+    manager_buaaer.do_publish()
