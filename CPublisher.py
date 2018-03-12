@@ -63,6 +63,28 @@ class CPublisher:
             self.browser.find_element_by_css_selector(post_element.get('CSS_input_button')).click()
             time.sleep(5)
 
+    def reply_artical(self , url , content ):
+        print("[Debug]navigate begin:" + url)
+        self.browser.set_page_load_timeout(3)
+        try:
+            self.browser.get( url )
+        except:
+            self.browser.execute_script('window.stop()')
+        print("[Debug]navigate end:" + url)
+
+        # 回复
+        locator = (By.CSS_SELECTOR , "textarea[id='quick_text']" )
+        if(self.wait_for_load(locator) == True):
+            self.browser.find_element_by_xpath( "textarea[id='quick_text']" ).send_keys(content)
+
+        self.browser.find_element_by_css_selector("td[id='quick_submit'] input").click()
+
+        # 找到编辑框
+        locator = (By.CSS_SELECTOR , "textarea[id='quick_text']" )
+        if(self.wait_for_load(locator) == True):
+            print("[Debug]Page Load success!")
+            time.sleep(5)
+
 
     def wait_for_load(self, locator ):
         try:

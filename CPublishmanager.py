@@ -100,3 +100,11 @@ class CPublish_manager_newsmth:
             publisher.login( self.login_url ,self.login_name , self.login_password , self.login_element)
             publisher.publish_artical( i.pub_url ,i.subject , i.content , self.post_element)
             del publisher
+
+    def do_reply(self):
+        for i in self.article_manager.list_article:
+            publisher = CPublisher()
+            publisher.login( self.login_url ,self.login_name , self.login_password , self.login_element)
+            publisher.reply_artical( i.pub_url ,"up" )
+            del publisher
+
