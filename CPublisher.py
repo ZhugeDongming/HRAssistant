@@ -114,18 +114,13 @@ class CPublisher:
             self.browser.execute_script('window.stop()')
         print("[Debug]navigate end:" + url)
 
-        # 回复
-        locator = self.set_locator( post_element.get('element_reply_content'))
-        #locator = (By.CSS_SELECTOR , "textarea[id='quick_text']" )
+        locator = self.set_locator( post_element.get("element_reply_content"))
         if(self.wait_for_load(locator) == True):
             ctrl = self.get_element(post_element.get('element_reply_content'))
             ctrl.send_keys( content)
 
             ctrl = self.get_element(post_element.get('element_reply_submit'))
             ctrl.click()
-
-            #self.browser.find_element_by_xpath( "textarea[id='quick_text']" ).send_keys(content)
-            #self.browser.find_element_by_css_selector("td[id='quick_submit'] input").click()
 
             time.sleep(5)
 

@@ -16,6 +16,7 @@ CONFIG_KEY = [ "login_url" ,
                "element_post_content",
                "element_input_button",
                "element_new_article_button",
+               "element_reply_button",
                "element_reply_content",
                "element_reply_submit"
                ]
@@ -81,7 +82,7 @@ class CPublish_manager_newsmth(CPublish_manager):
         for i in self.article_manager.list_article:
             publisher = CPublisher()
             publisher.login( self.login_url ,self.login_name , self.login_password , self.element)
-            publisher.reply_artical( i.pub_url ,"up" )
+            publisher.reply_artical( i.pub_url ,"up" ,self.element)
             del publisher
 
 class CPublish_manager_buaaer(CPublish_manager):

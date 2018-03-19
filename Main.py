@@ -10,7 +10,6 @@ if __name__ == "__main__":
     manager_byr.do_publish()
 
     manager_newsmth = CPublish_manager_newsmth("newsmth")
-    #manager_newsmth.do_publish()
     manager_newsmth.do_reply()
 
     manager_buaaer = CPublish_manager_buaaer("buaaer")
