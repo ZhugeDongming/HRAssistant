@@ -19,6 +19,8 @@ class CPublisher:
 
     def parese_element(self , element ):
         array = element.split(",")
+        if( len(array) != 2):
+            return "Error",None
         element_type = array[0].strip()
         value = array[1].strip()
         if( element_type == "ID"):
@@ -39,6 +41,8 @@ class CPublisher:
         elif( k == "XPATH" ):
             locator = (By.XPATH,  v )
             return locator
+        elif( k == "Error"):
+            return v
 
     def get_element(self , element ):
         (k, v) = self.parese_element(element)
@@ -55,24 +59,25 @@ class CPublisher:
         self.browser.get( url )
 
         locator = self.set_locator( login_element.get('element_id'))
+        if( locator != None):
+            if( self.wait_for_load( locator ) == True):
+                ctrl = self.get_element(login_element.get('element_id'))
+                ctrl.send_keys( name )
 
-        if( self.wait_for_load( locator ) == True):
-            ctrl = self.get_element(login_element.get('element_id'))
-            ctrl.send_keys( name )
+                ctrl = self.get_element(login_element.get('element_passwd'))
+                ctrl.send_keys( passwd )
 
-            ctrl = self.get_element(login_element.get('element_passwd'))
-            ctrl.send_keys( passwd )
-
-            ctrl = self.get_element(login_element.get('element_button'))
-            ctrl.click()
-        else:
-            print "[Error]Wait for Login page Failed!"
+                ctrl = self.get_element(login_element.get('element_button'))
+                ctrl.click()
+            else:
+                print "[Error]Wait for Login page Failed!"
 
         locator = self.set_locator( login_element.get('element_state'))
-        if(self.wait_for_load(locator) == True):
-            self.login_stat = True
-        else:
-            print "[Error]Wait for Logined page Failed!"
+        if( locator != None):
+            if(self.wait_for_load(locator) == True):
+                self.login_stat = True
+            else:
+                print "[Error]Wait for Logined page Failed!"
 
 
     def publish_artical(self , url , subject ,content , post_element):
@@ -86,24 +91,26 @@ class CPublisher:
 
         # 新主题
         locator = self.set_locator( post_element.get('element_new_article_button'))
-        if(self.wait_for_load(locator) == True):
-            ctrl = self.get_element(post_element.get('element_new_article_button'))
-            ctrl.click()
+        if( locator != None):
+            if(self.wait_for_load(locator) == True):
+                ctrl = self.get_element(post_element.get('element_new_article_button'))
+                ctrl.click()
 
         # 找到编辑框
         locator = self.set_locator( post_element.get('element_post_subject'))
-        if(self.wait_for_load(locator) == True):
-            print("[Debug]Page Load success!")
-            ctrl = self.get_element(post_element.get('element_post_subject'))
-            ctrl.send_keys( subject)
+        if( locator != None):
+            if(self.wait_for_load(locator) == True):
+                print("[Debug]Page Load success!")
+                ctrl = self.get_element(post_element.get('element_post_subject'))
+                ctrl.send_keys( subject)
 
-            ctrl = self.get_element(post_element.get('element_post_content'))
-            ctrl.send_keys( content)
+                ctrl = self.get_element(post_element.get('element_post_content'))
+                ctrl.send_keys( content)
 
-            ctrl = self.get_element(post_element.get('element_input_button'))
-            ctrl.click()
+                ctrl = self.get_element(post_element.get('element_input_button'))
+                ctrl.click()
 
-            time.sleep(5)
+                time.sleep(5)
 
     def reply_artical(self , url , content , post_element ):
         print("[Debug]navigate begin:" + url)
