@@ -1,6 +1,8 @@
 __author__ = 'Dongming'
 # encoding: utf-8
 
+import os
+import sys
 import ConfigParser
 from CArticle import CArticleManager
 from CPublisher import CPublisher
@@ -29,7 +31,8 @@ class CPublish_manager:
         self.section_name = section_name
         self.element = dict()
         self.article_manager = CArticleManager()
-        self.load_config('./config/config.ini')
+        self.curdir = os.path.split( os.path.realpath( sys.argv[0] ) )[0]
+        self.load_config(self.curdir + '/config/config.ini')
 
 
     def  load_config(self, config_file_path):
@@ -71,12 +74,12 @@ class CPublish_manager:
 class CPublish_manager_byr(CPublish_manager):
     def __init__(self , setion_name):
         CPublish_manager.__init__(self , setion_name)
-        self.article_manager.load_article_path("./config/byr.ini")
+        self.article_manager.load_article_path(self.curdir + "/config/byr.ini")
 
 class CPublish_manager_newsmth(CPublish_manager):
     def __init__(self , setion_name):
         CPublish_manager.__init__(self , setion_name)
-        self.article_manager.load_article_path("./config/newsmth.ini")
+        self.article_manager.load_article_path(self.curdir + "/config/newsmth.ini")
 
     def do_reply(self):
         for i in self.article_manager.list_article:
@@ -88,9 +91,9 @@ class CPublish_manager_newsmth(CPublish_manager):
 class CPublish_manager_buaaer(CPublish_manager):
     def __init__(self , setion_name):
         CPublish_manager.__init__(self , setion_name)
-        self.article_manager.load_article_path("./config/buaaer.ini")
+        self.article_manager.load_article_path(self.curdir + "/config/buaaer.ini")
 
 class CPublish_manager_bjtu(CPublish_manager):
     def __init__(self , setion_name):
         CPublish_manager.__init__(self , setion_name)
-        self.article_manager.load_article_path("./config/bjtu.ini")
+        self.article_manager.load_article_path(self.curdir + "/config/bjtu.ini")
